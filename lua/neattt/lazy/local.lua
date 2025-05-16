@@ -1,36 +1,5 @@
 
 local local_plugins = {
-    --{
-    --    "vim-guys",
-    --    dir = "~/personal/vim-guys",
-    --    config = function()
-    --    end,
-    --},
-    --{
-    --    "cockpit",
-    --    dir = "~/personal/cockpit",
-    --    config = function()
-    --        require("cockpit")
-    --        vim.keymap.set("n", "<leader>ct", "<cmd>CockpitTest<CR>")
-    --        vim.keymap.set("n", "<leader>cr", "<cmd>CockpitRefresh<CR>")
-    --    end,
-    --},
-
-    --{
-    --    "streamer",
-    --    dir = "~/personal/eleven-streamer",
-    --    dependencies = {
-    --        "livinglogic-nl/ws.nvim"
-    --    },
-    --    config = function() end
-    --},
-
-
-    {
-        "caleb",
-        dir = "~/personal/caleb",
-        config = function() end
-    },
     {
         "harpoon",
         dir = "~/personal/harpoon",
@@ -52,21 +21,6 @@ local local_plugins = {
             vim.keymap.set("n", "<leader><C-n>", function() harpoon:list():replace_at(3) end)
             vim.keymap.set("n", "<leader><C-s>", function() harpoon:list():replace_at(4) end)
         end
-    },
-    {
-        "vim-apm", dir = "~/personal/vim-apm",
-        config = function()
-            --[[
-            local apm = require("vim-apm")
-
-            apm:setup({})
-            vim.keymap.set("n", "<leader>apm", function() apm:toggle_monitor() end)
-            --]]
-        end
-    },
-    {
-        "vim-with-me", dir = "~/personal/vim-with-me",
-        config = function() end
     },
 }
 
