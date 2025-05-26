@@ -7,7 +7,9 @@ function ColorMyPencils(color)
 end
 
 return {
-
+    {
+        "nyoom-engineering/oxocarbon.nvim",
+    },
     {
         "erikbackman/brightburn.vim",
     },
