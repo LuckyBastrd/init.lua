@@ -8,6 +8,22 @@ end
 
 return {
     {
+        "zootedb0t/citruszest.nvim",
+        lazy = false,
+        config = function()
+            require("citruszest").setup({
+                option = {
+                    transparent = false,
+                    bold = false,
+                    italic = true,
+                },
+                style = {
+                    Constant = { fg = "#FFFFFF", bold = true },
+                },
+            })
+        end
+    },
+    {
         "nyoom-engineering/oxocarbon.nvim",
     },
     {
@@ -50,7 +66,7 @@ return {
                 dim_inactive = false,
                 transparent_mode = false,
             })
-        end,
+        end
     },
     {
         "folke/tokyonight.nvim",
@@ -88,6 +104,4 @@ return {
             ColorMyPencils();
         end
     },
-
-
 }
