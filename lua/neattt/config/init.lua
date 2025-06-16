@@ -1,0 +1,5 @@
+require("neattt.config.options")
+require("neattt.config.keymaps")
+require("neattt.config.lazy")
+require("neattt.config.autocmds")
+require("neattt.config.netrw")
