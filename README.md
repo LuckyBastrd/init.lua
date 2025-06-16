@@ -1,1 +1,1 @@
-# π NVIM CONFIG
+# π nvim config
