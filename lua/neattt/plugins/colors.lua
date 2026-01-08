@@ -11,17 +11,7 @@ return {
         "nyoom-engineering/oxocarbon.nvim",
 
         config = function()
-            ColorMyPencils("oxocarbon")
-        end
-    },
-    {
-        "Yagua/nebulous.nvim",
-
-        config = function()
-            require("nebulous").setup({
-                variant = "night",
-            })
-            ColorMyPencils("nebulous")
+            ColorMyPencil("oxocarbon")
         end
     },
 }
