@@ -1,8 +1,14 @@
 return {
-	"j-hui/fidget.nvim",
-	version = "*",
+	{
+		"j-hui/fidget.nvim",
+		version = "*",
 
-	config = function()
-		require("fidget").setup({})
-	end,
+		config = function()
+			require("fidget").setup({
+				notification = {
+					override_vim_notify = true,
+				},
+			})
+		end,
+	},
 }

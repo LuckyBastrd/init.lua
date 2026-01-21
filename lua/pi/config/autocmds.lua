@@ -29,13 +29,6 @@ autocmd("BufWritePre", {
 	end,
 })
 
-autocmd("BufEnter", {
-	group = piGroup,
-	callback = function()
-		vim.cmd.colorscheme("carbonfox")
-	end,
-})
-
 autocmd("LspAttach", {
 	group = piGroup,
 	callback = function(e)

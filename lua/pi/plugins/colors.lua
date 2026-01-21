@@ -1,16 +1,30 @@
-function ColorMyPencils(color)
-	color = color
-	vim.cmd.colorscheme(color)
-
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-end
-
 return {
 	{
-		"nyoom-engineering/oxocarbon.nvim",
-	},
-	{
-		"EdenEast/nightfox.nvim",
+		"lmantw/themify.nvim",
+		lazy = false,
+		priority = 999,
+
+		config = function()
+			require("themify").setup({
+				--- Your list of colorschemes.
+				"nyoom-engineering/oxocarbon.nvim",
+
+				"bluz71/vim-moonfly-colors",
+
+				{
+					"EdenEast/nightfox.nvim",
+
+					before = function()
+						require("nightfox").setup({
+							options = {
+								transparent = true,
+							},
+						})
+					end,
+				},
+			})
+
+			vim.keymap.set("n", "<leader>tp", ":Themify<CR>", { desc = "Open Themify" })
+		end,
 	},
 }
