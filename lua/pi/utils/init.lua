@@ -1,0 +1,1 @@
+--- require("pi.utils.colorscheme_picker").load_last_colorscheme()

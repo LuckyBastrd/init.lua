@@ -1,35 +1,45 @@
-vim.opt.guicursor = ""
+local opt = vim.opt
 
-vim.opt.nu = true
-vim.opt.relativenumber = true
+opt.guicursor = ""
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+opt.inccommand = "split"
 
-vim.opt.smartindent = true
+opt.smartcase = true
+opt.ignorecase = true
 
-vim.opt.wrap = false
+opt.number = true
+opt.relativenumber = true
 
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-vim.opt.undofile = true
+opt.splitbelow = true
+opt.splitright = true
 
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+opt.signcolumn = "yes"
+opt.shada = { "'10", "<0", "s10", "h" }
 
-vim.opt.termguicolors = true
+opt.swapfile = false
 
-vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
-vim.opt.isfname:append("@-@")
+opt.wrap = true
+opt.linebreak = true
 
-vim.opt.updatetime = 50
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
 
-vim.opt.colorcolumn = "80"
-vim.opt.background = "dark"
+opt.foldmethod = "manual"
+
+opt.title = true
+opt.titlestring = '%t%( %M%)%( (%{expand("%:~:h")})%)%a (nvim)'
+
+opt.undofile = true
+
+opt.termguicolors = true
+
+opt.scrolloff = 8
+opt.updatetime = 50
+
+opt.colorcolumn = "80"
+opt.background = "dark"
 
 -- Netrw configuration
 vim.g.netrw_browse_split = 0
