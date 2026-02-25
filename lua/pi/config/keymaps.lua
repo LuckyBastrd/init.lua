@@ -74,7 +74,7 @@ end)
 vim.keymap.set("n", "]]", "<cmd>cnext<CR>", { silent = true })
 vim.keymap.set("n", "[[", "<cmd>cprev<CR>", { silent = true })
 
-set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+--set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 vim.api.nvim_create_user_command("LualineShortMode", function()
 	vim.g.lualine_short_modes = not vim.g.lualine_short_modes

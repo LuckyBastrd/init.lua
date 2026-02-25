@@ -8,6 +8,7 @@ require("telescope").setup({
 				{ "private_", "" },
 				{ "external_", "" },
 				{ "env/", "" },
+				-- { "%.tmpl$", "" },
 			}
 
 			for _, sub in ipairs(subs) do
