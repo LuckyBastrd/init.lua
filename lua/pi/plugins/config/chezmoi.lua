@@ -3,6 +3,7 @@ local ignore_patterns = {
 	"run_onchange_.*",
 	"run_once_.*",
 	"run_after_.*",
+	"%.chezmoidata",
 	"%.chezmoiignore",
 	"%.chezmoitemplate",
 	"%.chezmoiexternal.*",
