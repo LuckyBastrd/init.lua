@@ -1,7 +1,4 @@
 return {
-	-- {
-	-- 	dir = "~/personal/my-plugins/ColorMyPencils",
-	-- },
 	{
 		"lmantw/themify.nvim",
 		lazy = false,

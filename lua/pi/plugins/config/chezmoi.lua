@@ -1,5 +1,4 @@
 local ignore_patterns = {
-	"/submodules/",
 	"run_onchange_.*",
 	"run_once_.*",
 	"run_after_.*",
@@ -8,6 +7,8 @@ local ignore_patterns = {
 	"%.chezmoitemplate",
 	"%.chezmoiexternal.*",
 	"%.toml.tmpl",
+	"/external_nvim/",
+	"/.chezmoiscripts/",
 }
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
