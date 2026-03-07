@@ -24,8 +24,14 @@ require("lualine").setup({
 
 					local mode_table = vim.g.lualine_short_modes and sl.modes_short or sl.modes_long
 
-					return mode_table[mode] or mode
+					if mode_table[mode] then
+						return mode_table[mode]
+					else
+						return string.upper(string.sub(mode, 1, 2))
+					end
 				end,
+
+				-- color = { gui = "bold" },
 			},
 		},
 		lualine_b = {

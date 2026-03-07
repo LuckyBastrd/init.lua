@@ -1,7 +1,19 @@
+local sl = require("pi.utils.statusline")
+
 local set = vim.keymap.set
 local k = vim.keycode
 local f = require("pi.utils.f")
 local fn = f.fn
+
+-- -- help me
+-- local modes = { "n", "i", "v" }
+--
+-- for _, mode in ipairs(modes) do
+-- 	set(mode, "<Up>", "<Nop>", { noremap = true, silent = true })
+-- 	set(mode, "<Down>", "<Nop>", { noremap = true, silent = true })
+-- 	set(mode, "<Left>", "<Nop>", { noremap = true, silent = true })
+-- 	set(mode, "<Right>", "<Nop>", { noremap = true, silent = true })
+-- end
 
 set("n", "<c-j>", "<c-w><c-j>")
 set("n", "<c-k>", "<c-w><c-k>")
@@ -15,6 +27,7 @@ set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current
 set("n", "<CR>", function()
 	---@diagnostic disable-next-line: undefined-field
 	if vim.v.hlsearch == 1 then
+		sl.clear_search()
 		vim.cmd.nohl()
 		return ""
 	else
@@ -74,13 +87,16 @@ end)
 vim.keymap.set("n", "]]", "<cmd>cnext<CR>", { silent = true })
 vim.keymap.set("n", "[[", "<cmd>cprev<CR>", { silent = true })
 
+set("n", "<space>rn", function()
+	return ":IncRename " .. vim.fn.expand("<cword>")
+end, { expr = true })
+
+set("n", "<space>nf", function()
+	require("pi.utils.floating_window").FloatingInput({ title = "New File" }, function(name)
+		if name ~= "" then
+			vim.cmd("edit " .. name)
+		end
+	end)
+end)
+
 --set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
-vim.api.nvim_create_user_command("LualineShortMode", function()
-	vim.g.lualine_short_modes = not vim.g.lualine_short_modes
-
-	require("pi.utils.statusline").save(vim.g.lualine_short_modes)
-
-	local status = vim.g.lualine_short_modes and "ON" or "OFF"
-	vim.notify("Lualine short modes: " .. status)
-end, {})

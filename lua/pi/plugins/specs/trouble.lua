@@ -1,6 +1,7 @@
 return {
 	"folke/trouble.nvim",
 
+	---@diagnostic disable
 	config = function()
 		local trouble = require("trouble")
 

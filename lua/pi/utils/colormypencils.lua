@@ -10,7 +10,7 @@ local function resolve(name)
 		link = false,
 	})
 
-	if ok and hl and (hl.fg ~= nil or hl.bg ~= nil) then
+	if ok and hl and next(hl) ~= nil then
 		return hl
 	end
 end
@@ -77,15 +77,34 @@ local function apply_highlights(defs)
 	end
 end
 
-local function apply_statusline_highlight()
+local function apply_general_highlight()
 	local normal = M.get_hl({ name = "Normal" })
-	local statusline = M.get_hl({ name = "StatusLine" })
+	local comment = M.get_hl({ name = "Comment" })
+	local non_text = M.get_hl({ name = "NonText" })
+	local status_line = M.get_hl({ name = "StatusLine" })
+	local directory = M.get_hl({ name = "Directory" })
+	local float_title = M.get_hl({ name = "FloatTitle" })
 
-	vim.api.nvim_set_hl(0, "StatusLine", {
-		fg = normal.fg,
-		bg = normal.bg,
-		bold = statusline.bold,
-		italic = statusline.italic,
+	apply_highlights({
+		StatusLine = {
+			fg = normal.fg,
+			bg = normal.bg,
+			bold = status_line.bold,
+			italic = status_line.italic,
+		},
+		FloatingInputPrompt = {
+			fg = directory.fg,
+		},
+		FloatingInputTitle = {
+			fg = float_title.fg,
+			bg = normal.bg,
+		},
+		AlphaText = {
+			fg = comment.fg,
+		},
+		AlphaFooter = {
+			fg = non_text.fg,
+		},
 	})
 end
 
@@ -102,6 +121,7 @@ local highlight_overrides = {
 		local normal = M.get_hl({ name = "Normal" })
 		local statusline_nc = M.get_hl({ name = "StatusLineNC" })
 		local vert_split = M.get_hl({ name = "VertSplit" })
+		local pmenusel = M.get_hl({ name = "Pmenusel" })
 
 		apply_highlights({
 			lualine_c_y_section = { fg = "#E4E4E4" },
@@ -114,6 +134,14 @@ local highlight_overrides = {
 			VertSplit = {
 				fg = vert_split.fg,
 				bg = normal.bg,
+			},
+			NotifyBackground = {
+				fg = normal.fg,
+				bg = normal.bg,
+			},
+			Pmenusel = {
+				fg = pmenusel.fg,
+				bg = "#323437",
 			},
 		})
 	end,
@@ -132,14 +160,16 @@ local highlight_overrides = {
 	end,
 }
 
-local function apply_override()
+function M.apply_override()
 	local cs = vim.g.colors_name
 
-	apply_statusline_highlight()
+	-- apply_general_highlight()
 
 	if highlight_overrides[cs] then
 		highlight_overrides[cs]()
 	end
+
+	apply_general_highlight()
 end
 
 function M.enable_autocmd()
@@ -147,7 +177,7 @@ function M.enable_autocmd()
 
 	vim.api.nvim_create_autocmd("ColorScheme", {
 		group = custom_highlight,
-		callback = apply_override,
+		callback = M.apply_override,
 	})
 end
 

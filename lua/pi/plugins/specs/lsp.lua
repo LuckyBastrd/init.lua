@@ -3,15 +3,13 @@ return {
 
 	dependencies = {
 		{
-			-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-			-- used for completion, annotations and signatures of Neovim apis
 			"folke/lazydev.nvim",
-			ft = "lua",
+			ft = "lua", -- only load on lua files
 			opts = {
 				library = {
+					-- See the configuration section for more details
 					-- Load luvit types when the `vim.uv` word is found
-					{ path = "luvit-meta/library", words = { "vim%.uv" } },
-					{ path = "/usr/share/awesome/lib/", words = { "awesome" } },
+					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 				},
 			},
 		},
@@ -20,16 +18,23 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 
+		{
+			"j-hui/fidget.nvim",
+			version = "1.6.1",
+		},
+
 		{ "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
 
 		{
 			"dmmulroy/tsc.nvim",
 			config = function()
+				---@diagnostic disable-next-line: missing-fields
 				require("tsc").setup({
 					run_as_monorepo = true,
 				})
 			end,
 		},
+
 		{
 			"pmizio/typescript-tools.nvim",
 			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },

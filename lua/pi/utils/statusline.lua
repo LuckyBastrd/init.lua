@@ -70,24 +70,40 @@ local skip_colorschemes = {
 }
 -- stylua: ignore end
 
+local last_search_result = nil
+
+M.clear_search = function()
+	last_search_result = nil
+end
+
 function M.get_searchcount()
+	local cmdtype = vim.fn.getcmdtype()
+	local in_search = cmdtype == "/" or cmdtype == "?"
+
+	if in_search then
+		return last_search_result or "%l:%c"
+	end
+
 	if vim.v.hlsearch == 0 then
-		return "%l:%c"
+		return last_search_result or "%l:%c"
 	end
 
 	local ok, count = pcall(vim.fn.searchcount, { recompute = true })
 	if not ok or count.current == nil or count.total == 0 then
-		return ""
+		return last_search_result or "%l:%c"
 	end
 
 	if count.incomplete == 1 then
+		last_search_result = "?/?"
 		return "?/?"
 	end
 
 	local too_many = string.format(">%d", count.maxcount)
 	local total = (count.total > count.maxcount) and too_many or count.total
+	local result = string.format("%s matches", total)
 
-	return string.format("%s matches", total)
+	last_search_result = result
+	return result
 end
 
 function M.get_active_window_hl()

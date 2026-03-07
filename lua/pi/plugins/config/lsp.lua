@@ -4,13 +4,38 @@ if pcall(require, "cmp_nvim_lsp") then
 end
 
 local servers = {
-	bashls = {
-		filetypes = { "sh", "sh.tmpl" },
+	bashls = true,
+	gopls = {
+		settings = {
+			gopls = {
+				templateExtensions = { "tmpl", "gotmpl", "gohtml" },
+				hints = {
+					assignVariableTypes = true,
+					compositeLiteralFields = true,
+					compositeLiteralTypes = true,
+					constantValues = true,
+					functionTypeParameters = true,
+					parameterNames = true,
+					rangeVariableTypes = true,
+				},
+			},
+		},
 	},
+	templ = true,
+	taplo = true,
 	lua_ls = {
 		cmd = { "lua-language-server" },
 		settings = {
 			Lua = {
+				runtime = {
+					version = "LuaJIT",
+					pathStrict = false,
+				},
+				workspace = {
+					library = vim.api.nvim_get_runtime_file("", true),
+					checkThirdParty = false,
+					ignoreDir = {},
+				},
 				format = {
 					enable = true,
 					defaultConfig = {
@@ -18,6 +43,7 @@ local servers = {
 						indent_size = "2",
 					},
 				},
+				telemetry = { enable = false },
 			},
 		},
 	},
@@ -39,7 +65,7 @@ local servers = {
 					enable = false,
 					url = "",
 				},
-				-- schemas = require("schemastore").yaml.schemas(),
+				schemas = require("schemastore").yaml.schemas(),
 			},
 		},
 	},
@@ -74,8 +100,8 @@ end, vim.tbl_keys(servers))
 require("mason").setup()
 local ensure_installed = {
 	"stylua",
-	"lua_ls",
-	"ts_ls",
+	"swiftformat",
+	"shfmt",
 }
 
 vim.list_extend(ensure_installed, servers_to_install)
@@ -89,13 +115,13 @@ vim.lsp.config("*", {
 -- Configure and enable each LSP server
 for name, config in pairs(servers) do
 	if config == true then
-		config = {}
+		config = {} --[[@as table<string, any>]]
 	end
 
-	-- Only call vim.lsp.config if there are server-specific settings
-	if next(config) ~= nil then
-		-- Remove manual_install flag as it's not an LSP config field
-		local lsp_config = vim.tbl_deep_extend("force", {}, config)
+	if
+		next(config --[[@as table<string, any>]]) ~= nil
+	then
+		local lsp_config = vim.tbl_deep_extend("force", {}, config --[[@as table<string, any>]])
 		lsp_config.manual_install = nil
 		vim.lsp.config(name, lsp_config)
 	end

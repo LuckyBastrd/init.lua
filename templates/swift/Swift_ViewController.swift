@@ -1,0 +1,19 @@
+//
+// {{_file_name_}}.swift
+// {{_lua:vim.fn.fnamemodify(vim.fn.getcwd(), ":t")_}}
+//
+// Created by {{_author_}} on {{_lua:os.date("%d/%m/%y")_}}.
+// Copyright © {{_lua:os.date("%Y")_}} {{_lua:vim.g.organization_}}. All rights reserved.
+//
+
+import UIKit
+
+class {{_file_name_}}: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor(.green)
+    }
+
+}

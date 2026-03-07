@@ -4,7 +4,9 @@ local setup = function()
 	conform.setup({
 		formatters_by_ft = {
 			lua = { "stylua" },
-			-- go = { "gofmt" },
+			swift = { "swiftformat" },
+			bash = { "shfmt" },
+			go = { "gofmt" },
 			-- javascript = { "prettier" },
 			-- typescript = { "prettier" },
 		},
@@ -22,6 +24,19 @@ local setup = function()
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		group = vim.api.nvim_create_augroup("custom-conform", { clear = true }),
 		callback = function(args)
+			local bufname = vim.api.nvim_buf_get_name(args.buf)
+
+			if bufname:match("%.stencil$") then
+				return
+			end
+
+			local ignore_dirs = { "templates" }
+			for _, dir in ipairs(ignore_dirs) do
+				if bufname:match("/" .. dir .. "/") then
+					return
+				end
+			end
+
 			require("conform").format({
 				bufnr = args.buf,
 				lsp_fallback = true,

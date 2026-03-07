@@ -6,12 +6,13 @@ M.setup = function()
 	require("nvim-treesitter").install({
 		"stable",
 		"vimdoc",
+		"lua",
+		"swift",
 		"javascript",
 		"typescript",
-		"lua",
-		"bash",
 		"go",
-		"swift",
+		"gotmpl",
+		"bash",
 	})
 
 	local syntax_on = {

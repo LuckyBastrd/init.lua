@@ -14,8 +14,6 @@ local kind_formatter = lspkind.cmp_format({
 		path = "[path]",
 		luasnip = "[snip]",
 		gh_issues = "[issues]",
-		tn = "[TabNine]",
-		eruby = "[erb]",
 	},
 })
 
@@ -37,6 +35,7 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "buffer" },
 	},
+
 	mapping = {
 		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -57,14 +56,23 @@ cmp.setup({
 	},
 
 	formatting = {
-		fields = { "abbr", "kind", "menu" },
+		fields = { "icon", "abbr", "menu", "kind" },
 		expandable_indicator = true,
 		format = function(entry, vim_item)
-			-- Lspkind setup for icons
-			vim_item = kind_formatter(entry, vim_item)
+			local max_width = 37
 
-			-- Tailwind colorizer setup
+			-- Lspkind icons
+			vim_item = kind_formatter(entry, vim_item)
+			vim_item.icon = " " .. (vim_item.icon or "") .. "  "
+			vim_item.kind = " (" .. (vim_item.kind or "") .. ") "
+
+			-- Tailwind colorizer
 			vim_item = require("tailwindcss-colorizer-cmp").formatter(entry, vim_item)
+
+			-- Truncate long text
+			if #vim_item.abbr > max_width then
+				vim_item.abbr = string.sub(vim_item.abbr, 1, max_width) .. "…"
+			end
 
 			return vim_item
 		end,
@@ -87,11 +95,19 @@ cmp.setup({
 		},
 	},
 	window = {
-		-- TODO: I don't like this at all for completion window, it takes up way too much space.
-		--  However, I think the docs one could be OK, but I need to fix the highlights for it
-		--
-		-- completion = cmp.config.window.bordered(),
-		-- documentation = cmp.config.window.bordered(),
+		completion = {
+			border = "single",
+			winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Pmenusel,Search:None",
+			max_height = 10,
+			col_offset = -3,
+			side_padding = 0,
+		},
+		documentation = {
+			border = "single",
+			winhighlight = "Normal:Normal,FloatBorder:Normal",
+			maxheight = 10,
+			side_padding = 0,
+		},
 	},
 })
 

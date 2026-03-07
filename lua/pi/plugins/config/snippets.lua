@@ -41,9 +41,9 @@ ls.config.set_config({
 	override_builtin = true,
 })
 
--- for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/custom/snippets/*.lua", true)) do
--- 	loadfile(ft_path)()
--- end
+for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/pi/plugins/config/snippets/*.lua", true)) do
+	loadfile(ft_path)()
+end
 
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
 	return vim.snippet.active({ direction = 1 }) and vim.snippet.jump(1)

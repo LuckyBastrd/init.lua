@@ -17,3 +17,12 @@ usercmd("Unique", function()
 
 	vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, uniq)
 end, { range = true })
+
+usercmd("LualineShortMode", function()
+	vim.g.lualine_short_modes = not vim.g.lualine_short_modes
+
+	require("pi.utils.statusline").save(vim.g.lualine_short_modes)
+
+	local status = vim.g.lualine_short_modes and "ON" or "OFF"
+	vim.notify("Lualine short modes: " .. status)
+end, {})
