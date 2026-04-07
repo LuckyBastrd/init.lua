@@ -45,5 +45,8 @@
   "tsc.nvim": { "branch": "main", "commit": "e083bcf1e54bc3af7df92b33235efb334e8c782c" },
   "typescript-tools.nvim": { "branch": "master", "commit": "c2f5910074103705661e9651aa841e0d7eea9932" },
   "undotree": { "branch": "master", "commit": "d8f99084d98c32f651860eb0baaf89759f91debc" },
+  "vim-dadbod": { "branch": "master", "commit": "6d1d41da4873a445c5605f2005ad2c68c99d8770" },
+  "vim-dadbod-completion": { "branch": "master", "commit": "a8dac0b3cf6132c80dc9b18bef36d4cf7a9e1fe6" },
+  "vim-dadbod-ui": { "branch": "master", "commit": "07e92e22114cc5b1ba4938d99897d85b58e20475" },
   "xcodebuild.nvim": { "branch": "main", "commit": "6ee81bcf0334eac180111ac7ac2435d421d1508d" }
 }

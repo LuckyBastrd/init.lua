@@ -12,6 +12,7 @@ require("themify").setup({
 	{
 		"EdenEast/nightfox.nvim",
 	},
+	"wnkz/monoglow.nvim",
 })
 
 set("n", "<space>cp", ":Themify<CR>", { desc = "Open Themify" })
